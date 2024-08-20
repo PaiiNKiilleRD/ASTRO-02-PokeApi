@@ -4,6 +4,7 @@ import PokemonCard from "@components/pokemons/PokemonCard.astro";
 import type { PokemonListResponse } from "@interfaces/pokemon-list.response";
 
 import Layout from "@/layout/Layout.astro";
+import Title from "@components/Title.astro";
 
 export const getStaticPaths = (async ({ paginate }) => {
   const resp = await fetch("https://pokeapi.co/api/v2/pokemon?limit=151");
@@ -16,7 +17,7 @@ const { page } = Astro.props;
 ---
 
 <Layout title="Pokemon Static | Home">
-  <h1 class="text-3xl">Listado de Pokemon</h1>
+  <Title>Listado de Pokemons</Title>
 
   <section
     aria-label="Listado de Pokemons"

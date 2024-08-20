@@ -1,0 +1,49 @@
+---
+const links = [
+  {
+    name: "Listado",
+    path: "/",
+  },
+  {
+    name: "Paginas",
+    path: "/pokemons/1",
+  },
+  {
+    name: "Favoritos",
+    path: "/favorites",
+  },
+  {
+    name: "Islas",
+    path: "/islands",
+  },
+];
+
+const currentPath = Astro.url.pathname;
+console.log("🚀 ~ currentPath:", currentPath);
+---
+
+<nav class="py-4">
+  <ul
+    class="flex items-center justify-center gap-8 [&>div>a]:px-2 [&>div>a]:duration-300 [&>div>a]:ease-in-out [&>div>a]:py-2 [&>div>a]:transition"
+  >
+    {
+      links.map((link) => {
+        return (
+          <div>
+            <a href={link.path} class:list={[" hover:text-gray-300"]}>
+              {link.name}
+            </a>
+            {currentPath === link.path ? (
+              <div
+                transition:name="menu-line"
+                class="border-b-2 border-sky-500 "
+              />
+            ) : (
+              <div class="border-b-2 border-transparent " />
+            )}
+          </div>
+        );
+      })
+    }
+  </ul>
+</nav>

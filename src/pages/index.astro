@@ -1,4 +1,6 @@
 ---
+import { Icon } from "astro-iconify";
+import Title from "@components/Title.astro";
 import PokemonCard from "../components/pokemons/PokemonCard.astro";
 import type { PokemonListResponse } from "../interfaces/pokemon-list.response";
 
@@ -9,7 +11,7 @@ const data = (await resp.json()) as PokemonListResponse;
 ---
 
 <Layout title="Pokemon Static | Home">
-  <h1 class="text-3xl">Listado de Pokemon</h1>
+  <Title>Listado </Title>
 
   <section
     aria-label="Listado de Pokemons"
