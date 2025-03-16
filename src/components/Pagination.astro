@@ -1,0 +1,29 @@
+---
+interface Props {
+  page: any;
+}
+
+const { page } = Astro.props;
+---
+
+<section class="flex w-full my-10 gap-3 justify-between items-center">
+  <a href={page.url.prev} class:list={[`btn`, { disabled: !page.url.prev }]}
+    >Anterior</a
+  >
+  <span class="text-3xl font-bold">Pagina {page.currentPage}</span>
+  <a href={page.url.next} class:list={[`btn`, { disabled: !page.url.next }]}
+    >Siguente</a
+  >
+</section>
+
+<style>
+  @import "tailwindcss";
+
+  .btn {
+    @apply bg-blue-500 px-5 py-2 text-white block rounded-md;
+  }
+
+  .disabled {
+    @apply bg-gray-600 text-gray-400;
+  }
+</style>

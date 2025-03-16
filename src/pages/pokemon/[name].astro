@@ -7,6 +7,8 @@ import PokemonCard from "@components/pokemons/PokemonCard.astro";
 import type { number } from "astro/zod";
 import Title from "@components/Title.astro";
 import { Icon } from "astro-icon/components";
+import HomeButton from "@components/HomeButton.astro";
+import BackButton from "@components/BackButton.astro";
 
 export const getStaticPaths = (async () => {
   const resp = await fetch("https://pokeapi.co/api/v2/pokemon?limit=151");
@@ -33,56 +35,43 @@ const imageSrc = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprit
   description={`Informacion sobre el pokemon ${name}`}
   image={imageSrc}
 >
-  <section class="mt-10 mx-10 flex flex-col justify-center items-center">
-    <a href={`/pokemons/1`}>
-      <div
-        class="rounded-3xl hover:text-white hover:bg-slate-400 transition-all duration-300 ease-in-out flex gap-3 px-5 min-w-[120px] bg-white py-3 text-black font-medium mb-10"
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          class="lucide lucide-house"
-          ><path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"></path><path
-            d="M3 10a2 2 0 0 1 .709-1.528l7-5.999a2 2 0 0 1 2.582 0l7 5.999A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"
-          ></path></svg
+  <section class="h-screen flex pt-[100px] justify-center">
+    <div class="flex items-center flex-col container">
+      <!-- Home button -->
+      <HomeButton />
+      <!-- Back button -->
+      <BackButton />
+      <!-- Pokemon info -->
+      <div class="flex items-center">
+        <div>
+          <Title>{name}</Title>
+        </div>
+        <button
+          id="btn-favorite"
+          class="ml-4 hover:cursor-pointer"
+          data-name={name}
+          data-id={id}
         >
-        Inicio
+          <Icon data-outline name="heart-outline" size={50} />
+          <Icon data-full class="hidden" name="heart-full" size={50} />
+        </button>
       </div>
-    </a>
-    <button onclick="history.back()">Atras</button>
-    <div class="flex items-center">
-      <div>
-        <Title>{name}</Title>
-      </div>
-      <button id="btn-favorite" class="ml-4" data-name={name} data-id={id}>
-        <Icon data-outline name="heart-outline" size={50} />
-        <Icon data-full class="hidden" name="heart-full" size={50} />
-      </button>
+
+      <PokemonCard name={name} url={url} isBig />
+
+      <audio controls class="mt-5">
+        <source src={audiSrc} type="audio/ogg" />
+        AUDIO NO SOPORTADO
+      </audio>
     </div>
-
-    <PokemonCard name={name} url={url} isBig />
-
-    <audio controls class="mt-5">
-      <source src={audiSrc} type="audio/ogg" />
-      AUDIO NO SOPORTADO
-    </audio>
   </section>
 </Layout>
 
 <script>
-  // interface FavoritePokemon {
-  //   name: string;
-  //   id: number;
-  // }
-
-  import type { FavoritePokemon } from "@interfaces/favorite-pokemon";
+  interface FavoritePokemon {
+    name: string;
+    id: number;
+  }
 
   const handlePageLoad = () => {
     let favoritePokemons: FavoritePokemon[] = JSON.parse(
@@ -143,6 +132,8 @@ const imageSrc = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprit
 </script>
 
 <style>
+  @import "tailwindcss";
+
   #btn-favorite {
     @apply hover:animate-pulse;
   }

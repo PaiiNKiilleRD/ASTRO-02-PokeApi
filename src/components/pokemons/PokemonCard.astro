@@ -11,9 +11,10 @@ const imageSrc = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprit
 ---
 
 <a
-  href={`/pokemons/${name}`}
+  href={`/pokemon/${name}`}
   class:list={[
-    `rounded flex flex-col justify-center items-center p-2`,
+    `rounded flex flex-col justify-center items-center p-2 
+    [&:hover>img]:scale-110 hover:border-sky-500 transition-all duration-300 ease-in-out`,
     { border: !isBig },
   ]}
 >
@@ -21,7 +22,7 @@ const imageSrc = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprit
     transition:name={`${name}-image`}
     src={imageSrc}
     alt={name}
-    class={`${isBig ? "w-26 h-26" : "w-22 h-22"}`}
+    class={`${isBig ? "w-26 h-26" : "w-22 h-22"} transition-all duration-300 ease-in-out`}
   />
   <span class={`capitalize ${isBig ? " text-3xl" : ""}`}>#{id} {name}</span>
 </a>

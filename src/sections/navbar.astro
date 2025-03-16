@@ -6,7 +6,7 @@ const links = [
   },
   {
     name: "Paginas",
-    path: "/pokemons/1",
+    path: "/pokemons/page/1",
   },
   {
     name: "Favoritos",
@@ -22,7 +22,7 @@ const currentPath = Astro.url.pathname;
 console.log("🚀 ~ currentPath:", currentPath);
 ---
 
-<nav class="py-4">
+<nav class="py-4 fixed top-0 right-0 w-full">
   <ul
     class="flex items-center justify-center gap-8 [&>div>a]:px-2 [&>div>a]:duration-300 [&>div>a]:ease-in-out [&>div>a]:py-2 [&>div>a]:transition"
   >
